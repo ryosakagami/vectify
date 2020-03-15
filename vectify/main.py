@@ -10,7 +10,7 @@ Main function
 """
 
 import anki_vector
-from util import init_spotify_client, show_current_track
+from vectify.util import init_spotify_client, show_current_track
 
 def main():
     spotify = init_spotify_client()
