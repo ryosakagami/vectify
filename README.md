@@ -25,3 +25,6 @@ Let's show your spotify information on the Vector's screen!
 
 ## How to Use
 See [examples](https://github.com/ryosakagami/vectify/tree/master/examples)!
+
+## Uninstall
+`pip uninstall vectify`
