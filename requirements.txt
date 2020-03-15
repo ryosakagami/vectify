@@ -1,0 +1,3 @@
+'anki_vector'
+'spotipy'
+git+ssh://https://github.com/ryosakagami/vector_text_stream.git
