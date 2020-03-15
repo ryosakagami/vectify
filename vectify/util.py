@@ -18,8 +18,9 @@ import anki_vector
 import anki_vector.util
 import spotipy
 import spotipy.util
+import vector_text_stream.util
 
-from config import CLIENT_ID, CLIENT_SECRET, USER, REDIRECT_URI
+from vectify.config import CLIENT_ID, CLIENT_SECRET, USER, REDIRECT_URI
 
 SCREEN_WIDTH = 184
 SCREEN_HEIGHT = 96
@@ -77,6 +78,11 @@ def show_current_track(robot, track):
     artwork_url = track['item']['album']['images'][1]['url']
     show_artwork(robot, artwork_url)
     # show track
+    track_name = track['item']['name']
+    artist_name_list = [artist['name'] for artist in track['item']['album']['artists']]
+    artist_names = ', '.join(artist_name_list)
+    track_info = track_name + ' / ' + artist_names
+    vector_text_stream.util.show_text(robot, track_info)
 
 
 
