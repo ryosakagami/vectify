@@ -1,11 +1,17 @@
 import os, sys
 from setuptools import setup, find_packages
 
+def take_package_name(name):
+    if name.startswith("-e"):
+        return name[name.find("=")+1:name.rfind("-")]
+    else:
+        return name.strip()
+
 def read_requirements():
     """Parse requirements from requirements.txt."""
     reqs_path = os.path.join('.', 'requirements.txt')
     with open(reqs_path, 'r') as f:
-        requirements = [line.rstrip() for line in f]
+        requirements = [take_package_name(pkg_name) for pkg_name in f.readlines()]
     return requirements
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
