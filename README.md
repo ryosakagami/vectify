@@ -18,6 +18,7 @@ Let's show your spotify information on the Vector's screen!
 - `python initialize.py` and follow instructions. More precisely,
     - Authorize the app with your account on the webpage which is opened automatically.
     - Copy the redirected URL and paste into the terminal.
+- Now, you should have a `/path/to/this/repo/.cache-username`. Open `/path/to/this/repo/vectify/config.py` again and assign the path to the cache file to CACHE_PATH.
 
 ## Run Example
 - `cd /path/to/this/repo`

@@ -20,7 +20,7 @@ import spotipy
 import spotipy.util
 import vector_text_stream.util
 
-from vectify.config import CLIENT_ID, CLIENT_SECRET, USER, REDIRECT_URI
+from vectify.config import CLIENT_ID, CLIENT_SECRET, USER, REDIRECT_URI, CACHE_PATH
 
 SCREEN_WIDTH = 184
 SCREEN_HEIGHT = 96
@@ -28,12 +28,17 @@ SCREEN_HEIGHT = 96
 SCOPE = 'user-read-currently-playing'
 
 def init_spotify_client():
+    if os.path.isfile(CACHE_PATH):
+        cache_path = CACHE_PATH
+    else:
+        cache_path = None
     token = spotipy.util.prompt_for_user_token(
         USER,
         scope=SCOPE,
         client_id=CLIENT_ID,
         client_secret=CLIENT_SECRET,
-        redirect_uri=REDIRECT_URI
+        redirect_uri=REDIRECT_URI,
+        cache_path=cache_path
     )
     spotify = spotipy.Spotify(auth=token)
     return spotify
