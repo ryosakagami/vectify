@@ -66,7 +66,7 @@ def adjust_image_for_vector(img):
     final_img.paste(img, offset_tuple)
     return final_img
 
-def show_artwork(robot, artwork_url, duration_s=4.0):
+def show_artwork(robot, artwork_url, duration_s=4.0, sleep=True):
     # Load an image
     artwork_file = get_image_from_url(artwork_url)
     artwork_file = adjust_image_for_vector(artwork_file)
@@ -76,18 +76,31 @@ def show_artwork(robot, artwork_url, duration_s=4.0):
     screen_data = anki_vector.screen.convert_image_to_screen_data(artwork_file)
 
     robot.screen.set_screen_with_image_data(screen_data, duration_s)
-    time.sleep(duration_s)
+    if sleep:
+        time.sleep(duration_s)
 
-def show_current_track(robot, track):
-    # show artwork
+def show_current_track(robot, track, artwork_duration_s=4.0):
+    # extract necessary information
     artwork_url = track['item']['album']['images'][1]['url']
-    show_artwork(robot, artwork_url)
-    # show track
     track_name = track['item']['name']
     artist_name_list = [artist['name'] for artist in track['item']['album']['artists']]
     artist_names = ', '.join(artist_name_list)
     track_info = track_name + ' / ' + artist_names
-    vector_text_stream.util.show_text(robot, track_info)
+
+    # show artwork
+    show_artwork(robot, artwork_url, duration_s=artwork_duration_s, sleep=False)  # without sleep to prepare text in the meantime
+    start = time.time()
+
+    # prepare text to show
+    screen_data_list = vector_text_stream.util.prepare_screen_data_list(track_info)
+
+    # wait until the end of showing artwork
+    while time.time() - start < artwork_duration_s:
+        time.sleep(0.1)
+
+    # show track
+    vector_text_stream.util.render_screen_data_list(robot, screen_data_list)
+
 
 
 
