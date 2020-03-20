@@ -77,7 +77,7 @@ class SpotifyTrackChecker(Thread):
                 self.robot.behavior.set_lift_height(0.0)
 
                 # Show current track info on Vector's face
-                show_current_track(self.robot, self.track)
+                show_current_track(self.robot, self.track, color=(0, 255, 110, 255))
 
                 # React somehow happily
                 self.react_happily()
