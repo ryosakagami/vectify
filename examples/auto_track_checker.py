@@ -9,6 +9,7 @@
 Check constantly if spotify is playing a track or not.
 If yes, and if a new track starts, Vector tells us its information!
 """
+import random
 import time
 from threading import Timer, RLock, Thread, Event
 
@@ -16,9 +17,19 @@ import anki_vector
 from vectify.util import init_spotify_client, show_current_track
 
 
+HAPPY_ANIM_TRIGGERS = [
+    'KnowledgeGraphSuccessReaction',
+    'ReactToGoodMorning',
+    'ReactToGreeting',
+    'Feedback_ILoveYou',
+    'GreetAfterLongTime',
+    'PRDemoGreeting'
+]
+
+
 class SpotifyTrackChecker(Thread):
 
-    def __init__(self, robot, interval_s=5, max_show_trial=1):
+    def __init__(self, robot, interval_s=10, max_show_trial=1):
         Thread.__init__(self)
         self.robot = robot
         self.interval_s = interval_s
@@ -41,6 +52,14 @@ class SpotifyTrackChecker(Thread):
         parsed_track['artist_name_list'] = [artist['name'] for artist in track['item']['album']['artists']]
         return parsed_track
 
+    def react_happily(self):
+        # randomly run animation trigger
+        # initialize seed
+        random.seed()
+        # shuffle list
+        shuffled = random.sample(HAPPY_ANIM_TRIGGERS, len(HAPPY_ANIM_TRIGGERS))
+        self.robot.anim.play_animation_trigger(shuffled[0])
+
     def show(self):
         current_show_trial = 0
         while current_show_trial < self.max_show_trial:
@@ -48,12 +67,20 @@ class SpotifyTrackChecker(Thread):
                 # Connect to Vector and overrides its behavior
                 self.robot.conn.request_control()
 
+                # Show some behavior
+                self.robot.anim.play_animation_trigger('SoundOnlyLiftEffortPlaceHigh')
+                # Say something
+                self.robot.behavior.say_text("Now playing...")
+
                 # Move Vector's Head and Lift for better visibility
                 self.robot.behavior.set_head_angle(anki_vector.util.degrees(25.0))
                 self.robot.behavior.set_lift_height(0.0)
 
                 # Show current track info on Vector's face
                 show_current_track(self.robot, self.track)
+
+                # React somehow happily
+                self.react_happily()
 
                 # Release connection to Vector
                 self.robot.conn.release_control()
