@@ -79,7 +79,7 @@ def show_artwork(robot, artwork_url, duration_s=4.0, sleep=True):
     if sleep:
         time.sleep(duration_s)
 
-def show_current_track(robot, track, artwork_duration_s=4.0):
+def show_current_track(robot, track, color=(233, 139, 51, 255), artwork_duration_s=4.0):
     # extract necessary information
     artwork_url = track['item']['album']['images'][1]['url']
     track_name = track['item']['name']
@@ -92,7 +92,7 @@ def show_current_track(robot, track, artwork_duration_s=4.0):
     start = time.time()
 
     # prepare text to show
-    screen_data_list = vector_text_stream.util.prepare_screen_data_list(track_info)
+    screen_data_list = vector_text_stream.util.prepare_screen_data_list(track_info, color=color)
 
     # wait until the end of showing artwork
     while time.time() - start < artwork_duration_s:
