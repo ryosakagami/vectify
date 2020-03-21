@@ -1,8 +1,8 @@
 # Vectify
-Let's show your spotify information on the Vector's screen!
+Let's get your spotify information via Vector!
 
 ## Quick Setup
-This package uses [spotipy](https://github.com/plamere/spotipy) for accessing the spotify information.
+This package uses [spotipy](https://github.com/plamere/spotipy) for accessing the spotify information and [vector_text_stream](https://github.com/ryosakagami/vector_text_stream) for showing information on the Vector's screen.
 
 - Create a Spotify app on https://developer.spotify.com/dashboard/
 - In the Spotify app webpage,
