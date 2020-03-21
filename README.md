@@ -2,6 +2,8 @@
 Let's show your spotify information on the Vector's screen!
 
 ## Quick Setup
+This package uses [spotipy](https://github.com/plamere/spotipy) for accessing the spotify information.
+
 - Create a Spotify app on https://developer.spotify.com/dashboard/
 - In the Spotify app webpage,
     - Open 'Edit Settings.
