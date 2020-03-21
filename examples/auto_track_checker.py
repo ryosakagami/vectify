@@ -71,6 +71,8 @@ class SpotifyTrackChecker(Thread):
                 self.robot.anim.play_animation_trigger('SoundOnlyLiftEffortPlaceHigh')
                 # Say something
                 self.robot.behavior.say_text("Now playing...")
+                # Talk about current track (only works for English titles and artist names)
+                # self.robot.behavior.say_text("is {} by {}".format(self.track_info['track_name'], ', '.join(self.track_info['artist_name_list'])))
 
                 # Move Vector's Head and Lift for better visibility
                 self.robot.behavior.set_head_angle(anki_vector.util.degrees(25.0))
