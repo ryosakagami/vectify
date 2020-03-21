@@ -22,7 +22,8 @@ Let's show your spotify information on the Vector's screen!
 
 ## Run Example
 - `cd /path/to/this/repo`
-- `python examples/main.py`
+- `python examples/auto_track_checker.py`
+- Now your Vector informs you of the track when Spotify plays the next one ;)
 
 ## How to Use
 See [examples](https://github.com/ryosakagami/vectify/tree/master/examples)!
