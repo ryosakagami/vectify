@@ -28,10 +28,14 @@ SCREEN_HEIGHT = 96
 SCOPE = 'user-read-currently-playing'
 
 def init_spotify_client():
-    if os.path.isfile(CACHE_PATH):
+    if CACHE_PATH is None:
+        cache_path = None
+    elif os.path.isfile(CACHE_PATH):
         cache_path = CACHE_PATH
     else:
+        print("CACHE_PATH does not point to a file. Initialize without using cache.")
         cache_path = None
+
     token = spotipy.util.prompt_for_user_token(
         USER,
         scope=SCOPE,
