@@ -21,6 +21,7 @@ This package uses [spotipy](https://github.com/plamere/spotipy) for accessing th
     - Authorize the app with your account on the webpage which is opened automatically.
     - Copy the redirected URL and paste into the terminal.
 - Now, you should have a `/path/to/this/repo/.cache-username`. Open `/path/to/this/repo/vectify/config.py` again and assign the path to the cache file to CACHE_PATH.
+- `pip install .` again so that the updated config.py is reinstalled.
 
 ## Run Example
 - `cd /path/to/this/repo`
